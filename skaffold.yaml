@@ -1,0 +1,19 @@
+apiVersion: skaffold/v2beta13
+kind: Config
+build:
+  local:
+    push: false
+  artifacts:
+    - image: redis
+      custom:
+        buildCommand: docker pull redis && docker tag redis:latest $IMAGE
+deploy:
+  helm:
+    releases:
+      - name: redis
+        remoteChart: redis
+        repo: https://charts.bitnami.com/bitnami
+requires:
+  - git:
+      repo: git@github.com:vladimir-avinkin/skaffold-bug-serviceA.git
+      ref: main
