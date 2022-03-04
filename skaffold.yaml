@@ -1,0 +1,11 @@
+apiVersion: skaffold/v2beta13
+kind: Config
+deploy:
+  helm:
+    releases:
+      - name: redis
+        repo: https://charts.bitnami.com/bitnami
+requires:
+  - git:
+      repo: git@github.com:vladimir-avinkin/skaffold-bug-serviceA.git
+      ref: main
